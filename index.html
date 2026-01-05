@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afrin Devis | Unity Game Developer</title>
+
+    <!-- ===== CSS START ===== -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* HERO */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #111, #1a1a1a);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            margin: 15px 0;
+            color: #aaa;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: #00ff99;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 60px 15%;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-left: 4px solid #00ff99;
+            padding-left: 10px;
+        }
+
+        /* SKILLS */
+        .skills span {
+            display: inline-block;
+            margin: 8px;
+            padding: 8px 14px;
+            background: #1f1f1f;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* PROJECTS */
+        .project-card {
+            background: #1a1a1a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: scale(1.03);
+        }
+
+        /* CONTACT */
+        .contact p {
+            margin: 8px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #111;
+            color: #666;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .section {
+                padding: 40px 8%;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+    <!-- ===== CSS END ===== -->
+
+</head>
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>AFRIN DEVIS</h1>
+        <p>Unity Game Developer | FPS & 2D Games</p>
+        <a href="#projects" class="btn">View Projects</a>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section">
+        <h2>About Me</h2>
+        <p>
+            I am a Unity Game Developer with hands-on experience in building
+            2D and 3D games including an FPS game and a completed Endless Runner.
+            I focus on gameplay programming, enemy AI, and clean C# code.
+        </p>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section">
+        <h2>Skills</h2>
+        <div class="skills">
+            <span>Unity 2D</span>
+            <span>Unity 3D</span>
+            <span>C#</span>
+            <span>FPS Mechanics</span>
+            <span>Enemy AI</span>
+            <span>NavMesh</span>
+            <span>Animator</span>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+        <h2>Projects</h2>
+
+        <div class="project-card">
+            <h3>FPS Game (In Development)</h3>
+            <p>
+                First-person shooter with player movement, shooting mechanics,
+                enemy AI using NavMesh, animations, and health system.
+            </p>
+        </div>
+
+        <div class="project-card">
+            <h3>2D Endless Runner</h3>
+            <p>
+                Infinite runner with procedural level generation,
+                scoring system, and increasing difficulty.
+            </p>
+        </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="section">
+        <h2>Education</h2>
+        <p><strong>Game Development using Unity (6 Months)</strong><br>
+        Malger Entertainments</p>
+
+        <p><strong>Higher Secondary</strong><br>
+        JKHSS Pulluvazhi</p>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact">
+        <h2>Contact</h2>
+        <p>Email: afrindavis37@gmail.com</p>
+        <p>Phone: 6238096153</p>
+    </section>
+
+    <footer>
+        <p>© 2026 Afrin Devis</p>
+    </footer>
+
+</body>
+</html>
