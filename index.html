@@ -1,7 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8"><!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afrin Davis | Outlaw Developer</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Nanum+Pen+Script&family=Crimson+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. SETTINGS & VARIABLES --- */
+        :root {
+            --rdr-red: #cc0000;
+            --rdr-dark-red: #5a0000;
+            --rdr-black: #0a0a0a;
+            --rdr-white: #e0e0e0;
+            --paper-color: #dccfbb;
+        }
+
+        /* --- 2. GLOBAL RESET --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none; /* Hides default cursor */
+        }
+
+        /* --- 3. BACKGROUND (CODE GENERATED - CANNOT FAIL) --- */
+        body {
+            font-family: 'Crimson Text', serif;
+            color: var(--rdr-white);
+            overflow-x: hidden;
+            min-height: 100vh;
+            
+            /* RDR2 Sunset Gradient: This replaces the image so it never breaks */
+            background: radial-gradient(circle at 50% 40%, #8a0000 0%, #3a0000 40%, #050505 90%);
+            background-attachment: fixed;
+        }
+
+        /* Film Grain Texture (Base64 - No download needed) */
+        body::after {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* --- 4. CUSTOM "AIM" CURSOR --- */
+        .cursor-dot {
+            width: 4px; height: 4px; background: white; border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%); mix-blend-mode: difference;
+        }
+        .cursor-circle {
+            width: 30px; height: 30px; border: 2px solid rgba(255,255,255,0.7); border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%); transition: 0.1s ease-out;
+        }
+        
+        /* Red Aim Effect on Hover */
+        body.hovering .cursor-dot { background: var(--rdr-red); transform: translate(-50%, -50%) scale(1.5); }
+        body.hovering .cursor-circle { width: 45px; height: 45px; border-color: var(--rdr-red); border-width: 3px; }
+
+        /* --- 5. NAVIGATION --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
+            border-top: 5px solid var(--rdr-red);
+        }
+
+        .logo {
+            font-family: 'Rye', serif; font-size: 1.5rem; color: #fff;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .nav-links { list-style: none; display: flex; gap: 30px; }
+        .nav-links a { 
+            text-decoration: none; color: #bbb; font-family: 'Rye', serif;
+            font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--rdr-red); text-shadow: 0 0 10px var(--rdr-red); }
+
+        /* --- 6. HERO SECTION --- */
+        header {
+            height: 100vh; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; text-align: center;
+        }
+
+        .badge {
+            background: var(--rdr-red); padding: 5px 25px; 
+            transform: skew(-10deg); margin-bottom: 20px;
+            box-shadow: 0 0 30px var(--rdr-red);
+        }
+        .badge span { 
+            display: block; transform: skew(10deg); font-family: 'Rye', serif; 
+            letter-spacing: 3px; font-weight: bold; font-size: 0.9rem;
+        }
+
+        h1 {
+            font-family: 'Rye', serif; font-size: 5.5rem; line-height: 1; margin: 0;
+            text-shadow: 5px 5px 0px #000; letter-spacing: 5px;
+        }
+
+        .subtitle { 
+            font-size: 1.2rem; color: #ddd; margin-top: 25px; 
+            letter-spacing: 3px; text-transform: uppercase; 
+            background: rgba(0,0,0,0.4); padding: 8px 15px; border-radius: 4px;
+        }
+
+        /* --- 7. ABOUT (JOURNAL) --- */
+        .journal-section {
+            padding: 80px 20px; display: flex; justify-content: center;
+        }
+        .journal-paper {
+            background: #fdf5e6; color: #2b1d0e; padding: 60px; max-width: 700px;
+            transform: rotate(-1deg); box-shadow: 15px 15px 40px rgba(0,0,0,0.6);
+            font-family: 'Nanum Pen Script', cursive; font-size: 2rem;
+            position: relative; line-height: 1.5;
+        }
+        /* Scotch Tape Look */
+        .journal-paper::before {
+            content: ''; position: absolute; top: -20px; left: 50%; width: 120px; height: 35px;
+            background: rgba(255, 255, 255, 0.3); border: 1px solid rgba(255,255,255,0.2);
+            transform: translateX(-50%) rotate(2deg); backdrop-filter: blur(2px);
+        }
+
+        /* --- 8. PROJECTS GRID --- */
+        .projects-section { padding: 100px 10%; }
+        
+        .section-title {
+            font-family: 'Rye', serif; font-size: 3.5rem; 
+            border-bottom: 3px solid var(--rdr-red);
+            display: inline-block; margin-bottom: 70px; 
+            text-shadow: 3px 3px 10px #000;
+        }
+
+        .grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 60px; 
+        }
+
+        .card {
+            background-color: var(--paper-color); color: #2b1d0e; padding: 25px;
+            text-align: center; position: relative;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.8);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            /* Initial State for Animation */
+            opacity: 0; transform: translateY(30px);
+            animation: fadeUp 0.8s forwards;
+        }
+
+        /* Slight rotation for natural look */
+        .card:nth-child(1) { transform: rotate(-2deg); animation-delay: 0.2s; }
+        .card:nth-child(2) { transform: rotate(1deg); animation-delay: 0.4s; }
+        .card:nth-child(3) { transform: rotate(-1deg); animation-delay: 0.6s; }
+
+        .card:hover { 
+            transform: scale(1.05) rotate(0deg) !important; 
+            z-index: 10; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+        }
+
+        /* Nail Effect */
+        .card::before {
+            content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            width: 15px; height: 15px; background: #111; border-radius: 50%; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .card-img {
+            width: 100%; height: 200px; object-fit: cover; 
+            border: 3px solid #2b1d0e; margin-bottom: 20px; 
+            filter: sepia(0.8) contrast(1.1); transition: 0.4s;
+            background: #555; /* Fallback color */
+        }
+
+        .card:hover .card-img { 
+            filter: sepia(0) contrast(1.1); border-color: var(--rdr-red); 
+        }
+
+        .card h3 { 
+            font-family: 'Rye', serif; font-size: 1.8rem; 
+            border-bottom: 2px solid #2b1d0e; display: inline-block; 
+            margin-bottom: 10px; padding-bottom: 5px;
+        }
+        
+        .card h4 { 
+            font-size: 0.9rem; font-weight: 800; text-transform: uppercase; 
+            margin-bottom: 15px; letter-spacing: 1px; color: #555;
+        }
+        
+        .card p { font-size: 1.1rem; margin-bottom: 20px; font-weight: 600; }
+        
+        .tech-stack { 
+            font-size: 0.8rem; font-weight: 900; text-transform: uppercase; 
+            border-top: 2px solid #2b1d0e; padding-top: 15px; color: var(--rdr-dark-red);
+        }
+
+        /* --- 9. FOOTER --- */
+        footer { 
+            padding: 50px; text-align: center; border-top: 4px solid var(--rdr-red); 
+            background: #000; font-family: 'Rye', serif; font-size: 0.9rem; 
+            color: #666; margin-top: 80px; 
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeUp { 
+            to { opacity: 1; transform: translateY(0) rotate(var(--rotation)); } 
+        }
+
+        /* --- MOBILE FIXES --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            .nav-links { display: none; }
+            .cursor-dot, .cursor-circle { display: none; }
+            * { cursor: auto; }
+            .journal-paper { width: 90%; padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle"></div>
+
+    <nav>
+        <div class="logo hover-trigger">AFRIN DAVIS</div>
+        <ul class="nav-links">
+            <li><a href="#projects" class="hover-trigger">Bounties</a></li>
+            <li><a href="#about" class="hover-trigger">Story</a></li>
+            <li><a href="#contact" class="hover-trigger">Telegram</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <div class="badge"><span>UNITY DEVELOPER</span></div>
+        <h1>AFRIN DAVIS</h1>
+        <p class="subtitle">"Code, Debug, Redemption"</p>
+    </header>
+
+    <section id="about" class="journal-section">
+        <div class="journal-paper">
+            <p>
+                <strong>January 14, 2026</strong><br><br>
+                Been riding through the code valleys for years now. I don't just write scripts; I build worlds.
+                <br><br>
+                Currently surviving on caffeine and sheer will, engineering a <strong>2D Endless Runner</strong> and a gritty <strong>TPS Shooter</strong> from scratch.
+                <br><br>
+                - Afrin
+            </p>
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+        <h2 class="section-title">WANTED: PROJECTS</h2>
+
+        <div class="grid">
+            
+            <div class="card hover-trigger" style="--rotation: -2deg;">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1968&auto=format&fit=crop" class="card-img" alt="2D Runner">
+                <h3>ENDLESS RUNNER</h3>
+                <h4>Alive or Dead (2D)</h4>
+                <p>A fast-paced 2D survival game. Features custom movement physics, procedural generation, and optimized object pooling.</p>
+                <div class="tech-stack">C# • Unity 2D • Physics</div>
+            </div>
+
+            <div class="card hover-trigger" style="--rotation: 1deg;">
+                <img src="https://images.unsplash.com/photo-1552072092-7f9b8d63efcb?q=80&w=2070&auto=format&fit=crop" class="card-img" alt="TPS Game">
+                <h3>TPS SHOOTER</h3>
+                <h4>Shoot to Kill (3D)</h4>
+                <p>Action-packed Third Person Shooter. Includes advanced character controller, Cinemachine camera, and weapon mechanics.</p>
+                <div class="tech-stack">Unity 3D • Cinemachine • AI</div>
+            </div>
+
+            <div class="card hover-trigger" style="--rotation: -1deg;">
+                <img src="https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=1974&auto=format&fit=crop" class="card-img" alt="Ghost AI">
+                <h3>GHOST A.I.</h3>
+                <h4>The Phantom Menace</h4>
+                <p>Advanced enemy behavior system. Uses State Machines and Raycasting to track the player through walls.</p>
+                <div class="tech-stack">AI Scripting • NavMesh • Logic</div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Afrin Davis. Built in the West.</p>
+    </footer>
+
+    <script>
+        // Custom Cursor Logic
+        const dot = document.querySelector('.cursor-dot');
+        const circle = document.querySelector('.cursor-circle');
+        const triggers = document.querySelectorAll('.hover-trigger');
+
+        // Move Cursor
+        document.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+            
+            // Add slight delay to circle for smooth "weapon sway" feel
+            setTimeout(() => {
+                circle.style.left = e.clientX + 'px';
+                circle.style.top = e.clientY + 'px';
+            }, 40);
+        });
+
+        // Hover Effects (Red Dead Eye)
+        triggers.forEach(t => {
+            t.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            t.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+    </script>
+</body>
+</html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Afrin Devis | Unity Game Developer</title>
 
@@ -189,3 +507,4 @@
 
 </body>
 </html>
+
